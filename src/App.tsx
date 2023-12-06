@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
-import { useNavigate } from 'react-router-dom';
-import DigitButton from "./Components/DigitButton.tsx"
-import OperationButton from "./Components/OperationButton.tsx"
+import { useNavigate } from "react-router-dom"
+import Number from "./Components/Number.tsx"
+import Operator from "./Components/Operator.tsx"
 import { evaluate } from "./Components/evaluate.tsx"
 import "./styles.css"
 
@@ -19,17 +19,17 @@ interface AppAction {
   payload?: any
 }
 
-export const ACTIONS = {
-  ADD_DIGIT: "add-digit",
-  CLEAR: "clear",
-  DELETE_DIGIT: "delete-digit",
-  CHOOSE_OPERATION: "choose-operation",
+export const CALC = {
+  RESET: "reset",
+  REMOVE: "remove",
+  ADD: "add",
+  OPERATION: "operation",
   EVALUATE: "evaluate"
 }
 
 function reducer(state: AppState, { type, payload }: AppAction): AppState {
   switch (type) {
-    case ACTIONS.ADD_DIGIT:
+    case CALC.ADD:
       if (state.overwrite) {
         return {
           ...state,
@@ -67,7 +67,7 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
         now: `${state.now || ""}${payload.digit}`
       }
 
-    case ACTIONS.CHOOSE_OPERATION:
+    case CALC.OPERATION:
       if (state.now == null && state.history == null) {
         return state
       }
@@ -98,7 +98,7 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
         operation: payload.symbol
       }
 
-    case ACTIONS.DELETE_DIGIT:
+    case CALC.REMOVE:
       if (state.overwrite) {
         return {
           ...state,
@@ -120,14 +120,14 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
         now: state.now.slice(0, -1)
       }
 
-    case ACTIONS.CLEAR:
+    case CALC.RESET:
       return {
         ...state,
-        now: " ",
+        now: "",
         history: ""
       }
 
-    case ACTIONS.EVALUATE:
+    case CALC.EVALUATE:
       if (
         state.operation == null ||
         state.now == null ||
@@ -153,7 +153,7 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
           overwrite: true,
           history: null,
           operation: null,
-          now: result,
+          now: result
         }
       }
       return {
@@ -177,10 +177,10 @@ function App() {
     now: "0",
     count: 0
   })
-  const routeLink = useNavigate();
+  const routeLink = useNavigate()
   const handleSupportButton = () => {
-    routeLink('/supportPage');
-  };
+    routeLink("/support-page")
+  }
   return (
     <div className="calculator-grid">
       <div className="output">
@@ -196,7 +196,7 @@ function App() {
       <button
         onClick={() =>
           dispatch({
-            type: ACTIONS.CLEAR,
+            type: CALC.RESET,
             payload: undefined
           })
         }
@@ -206,33 +206,35 @@ function App() {
       <button
         onClick={() =>
           dispatch({
-            type: ACTIONS.DELETE_DIGIT,
+            type: CALC.REMOVE,
             payload: undefined
           })
         }
       >
         DEL
       </button>
-      <button className="qmark" onClick={handleSupportButton}>?</button>
-      <OperationButton symbol="/" dispatch={dispatch} />
-      <DigitButton digit="1" dispatch={dispatch} className="" />
-      <DigitButton digit="2" dispatch={dispatch} className="" />
-      <DigitButton digit="3" dispatch={dispatch} className="" />
-      <OperationButton symbol="x" dispatch={dispatch} />
-      <DigitButton digit="4" dispatch={dispatch} className="" />
-      <DigitButton digit="5" dispatch={dispatch} className="" />
-      <DigitButton digit="6" dispatch={dispatch} className="" />
-      <OperationButton symbol="+" dispatch={dispatch} />
-      <DigitButton digit="7" dispatch={dispatch} className="" />
-      <DigitButton digit="8" dispatch={dispatch} className="" />
-      <DigitButton digit="9" dispatch={dispatch} className="" />
-      <OperationButton symbol="-" dispatch={dispatch} />
-      <DigitButton digit="0" dispatch={dispatch} className="" />
+      <button className="qmark" onClick={handleSupportButton}>
+        ?
+      </button>
+      <Operator symbol="/" dispatch={dispatch} />
+      <Number digit="1" dispatch={dispatch} className="" />
+      <Number digit="2" dispatch={dispatch} className="" />
+      <Number digit="3" dispatch={dispatch} className="" />
+      <Operator symbol="x" dispatch={dispatch} />
+      <Number digit="4" dispatch={dispatch} className="" />
+      <Number digit="5" dispatch={dispatch} className="" />
+      <Number digit="6" dispatch={dispatch} className="" />
+      <Operator symbol="+" dispatch={dispatch} />
+      <Number digit="7" dispatch={dispatch} className="" />
+      <Number digit="8" dispatch={dispatch} className="" />
+      <Number digit="9" dispatch={dispatch} className="" />
+      <Operator symbol="-" dispatch={dispatch} />
+      <Number digit="0" dispatch={dispatch} className="" />
       <button
         className="operator span-two bottom"
         onClick={() =>
           dispatch({
-            type: ACTIONS.EVALUATE,
+            type: CALC.EVALUATE,
             payload: undefined
           })
         }

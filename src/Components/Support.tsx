@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
-// import 'jquery/dist/jquery.min.js'
-// import 'bootstrap/dist/js/bootstrap.min.js'
-import "./support.css" // Create a new CSS file for styling
+import "../support.css"
 
 function NewSupportForm() {
   const [formData, setFormData] = useState({
@@ -12,7 +10,7 @@ function NewSupportForm() {
     topic: "",
     description: ""
   })
-  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState("")
   const [showModal, setShowModal] = useState(false)
   const handleClose = () => setShowModal(false)
   const [disabled, setDisabled] = useState(true)
@@ -31,7 +29,7 @@ function NewSupportForm() {
     const num = Math.round(Math.random() * 10)
     console.log(num)
     setTimeout(() => {
-      if (num <= 7) {
+      if (num <= 3) {
         setShowModal(true)
       } else {
         setTimeout(() => {
@@ -42,13 +40,13 @@ function NewSupportForm() {
   }
 
   useEffect(() => {
-    const { fName, lName, email } = formData;
-    setDisabled(!(fName && lName && email && selectedTopic));
-  }, [formData, selectedTopic]);
+    const { fName, lName, email } = formData
+    setDisabled(!(fName && lName && email && selectedTopic))
+  }, [formData, selectedTopic])
 
   if (!final) {
     return (
-      <div className="new-container">
+      <div className="support-container">
         <div
           className={`modal fade ${showModal ? "show" : ""}`}
           style={{ display: showModal ? "block" : "none" }}
@@ -60,7 +58,7 @@ function NewSupportForm() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLongTitle">
-                  Modal Title
+                  Error
                 </h5>
                 <button
                   type="button"
@@ -70,7 +68,9 @@ function NewSupportForm() {
                   onClick={handleClose}
                 ></button>
               </div>
-              <div className="modal-body">Your modal content goes here.</div>
+              <div className="modal-body">
+                Your message is failed to sent. Please try again!
+              </div>
               <div className="modal-footer">
                 <button
                   type="button"
@@ -84,10 +84,12 @@ function NewSupportForm() {
           </div>
         </div>
         <h1>Support Ticket Form</h1>
-        <div className="new-input-container">
-          <div className="new-left">
-            <p className="name-title">Name<span>*</span></p>
-            <div className="new-name-input">
+        <div className="support-input-container">
+          <div className="support-left">
+            <p className="name-title">
+              Name<span>*</span>
+            </p>
+            <div className="support-name-input">
               <div className="first-container">
                 <input
                   type="text"
@@ -95,7 +97,7 @@ function NewSupportForm() {
                   value={formData.fName}
                   onChange={inputChangeHandler}
                 />
-                    <label>First</label>
+                <label>First</label>
               </div>
               <div className="last-container">
                 <input
@@ -104,11 +106,13 @@ function NewSupportForm() {
                   value={formData.lName}
                   onChange={inputChangeHandler}
                 />
-                    <label>Last</label>
+                <label>Last</label>
               </div>
             </div>
-            <div className="new-email">
-              <p>Email<span>*</span></p>
+            <div className="support-email">
+              <p>
+                Email<span>*</span>
+              </p>
               <input
                 type="email"
                 name="email"
@@ -116,9 +120,11 @@ function NewSupportForm() {
                 onChange={inputChangeHandler}
               />
             </div>
-            <p>Topic<span>*</span></p>
-            <div className="new-topic">
-            <p>What can we help you today ?</p>
+            <p>
+              Topic<span>*</span>
+            </p>
+            <div className="support-topic">
+              <p>What can we help you today ?</p>
               <div className="topic-container">
                 <label>
                   <input
@@ -143,10 +149,12 @@ function NewSupportForm() {
                   Bug
                 </label>
               </div>
+            </div>
           </div>
-          </div>
-          <div className="new-right">
-            <label>Description <span className="optional">optional</span></label>
+          <div className="support-right">
+            <label>
+              Description <span className="optional">optional</span>
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -177,7 +185,10 @@ function NewSupportForm() {
             Thank you for sending us your report, we will track the problem now
           </h1>
           <p>
-            ticket number: <span className="ticket-num">{Math.round(Math.random() * 1000)}</span>
+            ticket number:
+            <span className="ticket-num">
+              {Math.round(Math.random() * 1000)}
+            </span>
           </p>
         </div>
       </div>
