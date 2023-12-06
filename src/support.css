@@ -1,0 +1,244 @@
+*,
+*::before,
+*::after {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+h1 {
+  border-bottom: 1px solid white;
+}
+
+.new-container {
+  padding: 1em;
+}
+
+.new-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1em;
+  padding-top: 1em;
+  margin-top: 0.5em;
+}
+
+.new-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 21.5rem;
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid rgb(209, 191, 191);
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  height: 1.75em;
+  padding: 5px;
+}
+
+textarea {
+  background-color: transparent;
+  border: 1px solid rgb(209, 191, 191);
+  color: white;
+  resize: none;
+  padding: 5px;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid orange;
+}
+
+.input-container .left {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+span {
+  font-size: 1em;
+  color: red;
+}
+
+.new-name-input {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.new-name-input input {
+  width: 10rem;
+}
+
+.new-name-input label {
+  color: rgb(184, 179, 173);
+}
+
+.first-container,
+.last-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: -30px;
+}
+
+.new-email {
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: -10px;
+}
+.new-email p {
+  margin: 0;
+}
+
+.new-email input {
+  position: relative;
+  padding: 0.5em;
+  width: 21.5rem;
+  /* top: -10px; */
+}
+.new-topic {
+  border: 2px dotted rgb(160, 148, 148);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+  margin-top: -30px;
+  padding: 1em;
+  background-color:rgb(22, 20, 20);
+}
+
+.new-topic input {
+  transform: scale(0.5);
+  /* margin-top: =20px; */
+}
+
+.new-topic input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    border: 2px solid white; 
+    background-color: white; 
+    outline: none;
+    margin-right: 8px; 
+  }
+
+.new-topic input[type="radio"]:checked {
+    background-color: orange;
+  }
+
+.new-topic label {
+    display: flex;
+    margin-top: -20px;
+    align-items: center;
+}
+
+
+.container .input-container .right label span {
+    font-size: 0.5em;
+    color: white;
+    align-self: self-start;
+}
+
+
+.new-right textarea {
+    margin-top: -8px;
+    padding: 5px;
+}
+
+.optional {
+    color: rgb(184, 179, 173);
+    position: relative;
+    font-size: smaller;
+    top: -5px;
+}
+
+.new-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.submit-btn {
+    align-self: self-end;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 40px;
+    width: 50%;
+    font-size: 1.25rem;
+    border: none;
+}
+
+.modal-title,
+.modal-body {
+    color: black;
+}
+
+
+/* FINAL */
+
+.final-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.final-container .ticket-title{
+    width: 100%;
+    font-size: 2.5rem;
+    align-self: flex-start;
+    border-bottom: 1px solid rgb(184, 179, 173);
+    font-weight: bold;
+}
+
+
+.ticket-container {
+    padding-top: 2rem;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 2rem;
+    
+}
+
+.ticket-container h1{
+    color: orange;
+    border: none;
+    font-weight: bold;
+
+}
+
+.ticket-container p{
+  font-size: 1.25rem;
+  color: rgb(184, 179, 173);
+  border: none;
+}
+
+.ticket-container .ticket-num{
+  font-size: 1.25rem;
+  color: white;
+  border: none;
+}
