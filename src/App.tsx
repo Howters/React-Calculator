@@ -89,6 +89,20 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
           now: payload.symbol
         }
       }
+      let results = evaluate(state)
+      if (state.count >= 1) {
+        return {
+          ...state,
+          now: evaluate(state),
+          overwrite: true,
+          history: null,
+          operation: null,
+          historyList: state.historyList
+          ? [...state.historyList, results]
+          : [results],
+          count: 0
+        }
+      }
 
       return {
         ...state,
@@ -103,7 +117,7 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
         return {
           ...state,
           overwrite: false,
-          now: null
+          now: "0"
         }
       }
 
@@ -111,7 +125,7 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
       if (state.now.length === 1) {
         return {
           ...state,
-          now: null
+          now: "0"
         }
       }
 
@@ -123,8 +137,9 @@ function reducer(state: AppState, { type, payload }: AppAction): AppState {
     case CALC.RESET:
       return {
         ...state,
-        now: "",
-        history: ""
+        now: "0",
+        history: null,
+        operation:null
       }
 
     case CALC.EVALUATE:
@@ -224,11 +239,11 @@ function App() {
       <Number digit="4" dispatch={dispatch} className="" />
       <Number digit="5" dispatch={dispatch} className="" />
       <Number digit="6" dispatch={dispatch} className="" />
-      <Operator symbol="+" dispatch={dispatch} />
+      <Operator symbol="-" dispatch={dispatch} />
       <Number digit="7" dispatch={dispatch} className="" />
       <Number digit="8" dispatch={dispatch} className="" />
       <Number digit="9" dispatch={dispatch} className="" />
-      <Operator symbol="-" dispatch={dispatch} />
+      <Operator symbol="+" dispatch={dispatch} />
       <Number digit="0" dispatch={dispatch} className="" />
       <button
         className="operator span-two bottom"
